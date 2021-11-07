@@ -7,10 +7,8 @@
         "rootDir": "./src",
         "removeComments": false,
         "resolveJsonModule": true,
-
         "strict": true,
         "strictPropertyInitialization": false,
-
         "moduleResolution": "node",
         "baseUrl": "./src",
         "allowSyntheticDefaultImports": true,
@@ -18,16 +16,7 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true,
-        "paths": {
-            "@root/*": ["*"],
-            "@decorators/*": ["decorators/*"],
-            "@endpoints/*": ["endpoints/*"],
-            "@library/*": ["library/*"],
-            "@models/*": ["models/*"],
-            "@routes/*": ["routes/*"],
-            "@utils/*": ["utils/*"],
-        }
+        "forceConsistentCasingInFileNames": true
     },
     "exclude": [
         "node_modules",

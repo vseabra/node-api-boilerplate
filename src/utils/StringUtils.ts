@@ -37,12 +37,16 @@ export class StringUtils {
      * @returns Texto tratado
      */
     public static firstLowerCase(text: string): string {
-        const strings: string[] = text.split(' ');
+        if (text) {
+            const strings: string[] = text.split(' ');
 
-        strings.forEach((value: string, index: number) => {
-            strings[index] = value.charAt(0).toLowerCase() + value.slice(1);
-        });
+            strings.forEach((value: string, index: number) => {
+                strings[index] = value.charAt(0).toLowerCase() + value.slice(1);
+            });
 
-        return strings.join(' ').trim();
+            return strings.join(' ').trim();
+        }
+
+        return text;
     }
 }
