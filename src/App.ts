@@ -65,20 +65,14 @@ export class App {
      * @param middlewares - Lista de middlewares
      */
     private setMiddlewares(middlewares: { forEach: (arg0: (middleware: any) => void) => void } | undefined): void {
-        // Basic middlewares
         this.app.use(helmet()); // Blinda os modos mais básicos de segurança
-
         this.app.use(express.json({ limit: '50mb' })); // Converte o body do request para objeto
-
         this.app.use(express.urlencoded({ limit: '50mb', extended: true }));
-
         this.app.use(cors({ origin: true })); // Automaticamente habilita cross-origin requests
-
         this.app.use(compression()); // Compressão GZIP
-
         this.app.use(fileMiddleware); // Trata arquivos enviados para rota e adiciona no express.req
 
-        // middlewares externos
+        // Middlewares externos
         if (middlewares) {
             middlewares.forEach(middleware => this.app.use(middleware));
         }
@@ -139,7 +133,6 @@ export class App {
      * configSwagger
      *
      * Percorre o arquivo de configuração e gera a documentação na api
-     * se não for declarado não gera o swagger
      *
      * @param options - Opções do swagger
      */
