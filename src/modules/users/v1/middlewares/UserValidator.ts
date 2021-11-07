@@ -3,10 +3,10 @@ import { RequestHandler } from 'express';
 import { Schema } from 'express-validator';
 
 // Repositories
-import { UserRepository } from './User.repository';
+import { UserRepository } from '../../../../library/database/repository/UserRepository';
 
 // Validators
-import { BaseValidator } from '../../../library/BaseValidator';
+import { BaseValidator } from '../../../../library/BaseValidator';
 
 /**
  * UserValidator
@@ -20,26 +20,30 @@ export class UserValidator extends BaseValidator {
      * Schema para validação no controller de usuários
      */
     private static model: Schema = {
+        id: {
+            ...BaseValidator.validators.id(new UserRepository()),
+            errorMessage: 'Usuário não encontrado'
+        },
         name: BaseValidator.validators.name
     };
 
     /**
      * post
      *
-     * @returns { Array<RequestHandler> }
+     * @returns Lista de validadores
      */
-    public static post(): Array<RequestHandler> {
+    public static post(): RequestHandler[] {
         return UserValidator.validationList(UserValidator.model);
     }
 
     /**
      * put
      *
-     * @returns { Array<RequestHandler> }
+     * @returns Lista de validadores
      */
-    public static put(): Array<RequestHandler> {
+    public static put(): RequestHandler[] {
         return UserValidator.validationList({
-            id: BaseValidator.validators.id(new UserRepository()),
+            id: UserValidator.model.id,
             ...UserValidator.model
         });
     }
@@ -47,11 +51,11 @@ export class UserValidator extends BaseValidator {
     /**
      * onlyId
      *
-     * @returns { Array<RequestHandler> }
+     * @returns Lista de validadores
      */
-    public static onlyId(): Array<RequestHandler> {
+    public static onlyId(): RequestHandler[] {
         return BaseValidator.validationList({
-            id: BaseValidator.validators.id(new UserRepository())
+            id: UserValidator.model.id
         });
     }
 }

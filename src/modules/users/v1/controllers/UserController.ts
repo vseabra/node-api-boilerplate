@@ -3,21 +3,25 @@ import { DeepPartial } from 'typeorm';
 import { Request, Response } from 'express';
 
 // Library
-import { BaseController } from 'library';
-import { Controller, Delete, Get, Middlewares, Post, PublicRoute, Put } from 'decorators';
-import { EnumEndpoints } from 'models';
-import { RouteResponse } from 'routes';
+import { BaseController } from '../../../../library';
 
-// Entities
-import { User } from './User.entity';
-
-// Repositories
-import { UserRepository } from './User.repository';
-
-// Validators
-import { UserValidator } from './User.validator';
+// Decorators
+import { Controller, Delete, Get, Middlewares, Post, PublicRoute, Put } from '../../../../decorators';
 
 // Models
+import { EnumEndpoints } from '../../../../models';
+
+// Routes
+import { RouteResponse } from '../../../../routes';
+
+// Entities
+import { User } from '../../../../library/database/entity';
+
+// Repositories
+import { UserRepository } from '../../../../library/database/repository';
+
+// Validators
+import { UserValidator } from '../middlewares/UserValidator';
 
 @Controller(EnumEndpoints.USER_V1)
 export class UserController extends BaseController {
@@ -31,8 +35,6 @@ export class UserController extends BaseController {
      *       - application/json
      *     produces:
      *       - application/json
-     *     security:
-     *       - BearerAuth: []
      *     parameters:
      *       - $ref: '#/components/parameters/listPageRef'
      *       - $ref: '#/components/parameters/listSizeRef'
@@ -44,7 +46,7 @@ export class UserController extends BaseController {
     @Get()
     @PublicRoute()
     public async get(req: Request, res: Response): Promise<void> {
-        const [rows, count] = await new UserRepository().list(UserController.listParams(req));
+        const [rows, count] = await new UserRepository().list<User>(UserController.listParams(req));
 
         RouteResponse.success({ rows, count }, res);
     }
@@ -79,14 +81,12 @@ export class UserController extends BaseController {
      * @swagger
      * /v1/user:
      *   post:
-     *     summary: Cadastro um usuário
+     *     summary: Cadastra um usuário
      *     tags: [Users]
      *     consumes:
      *       - application/json
      *     produces:
      *       - application/json
-     *     security:
-     *       - BearerAuth: []
      *     requestBody:
      *       content:
      *         application/json:
@@ -125,8 +125,6 @@ export class UserController extends BaseController {
      *       - application/json
      *     produces:
      *       - application/json
-     *     security:
-     *       - BearerAuth: []
      *     requestBody:
      *       content:
      *         application/json:
@@ -169,8 +167,6 @@ export class UserController extends BaseController {
      *       - application/json
      *     produces:
      *       - application/json
-     *     security:
-     *       - BearerAuth: []
      *     parameters:
      *       - in: path
      *         name: userId

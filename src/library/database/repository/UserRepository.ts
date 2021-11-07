@@ -1,11 +1,16 @@
-import { DeepPartial, DeleteResult } from 'typeorm';
-import { User } from './User.entity';
-import { BaseRepository } from '../../../library/database/repository/BaseRepository';
+// Modules
+import { DeepPartial, DeleteResult, Repository } from 'typeorm';
+
+// Entities
+import { User } from '../entity';
+
+// Repositories
+import { BaseRepository } from './BaseRepository';
 
 /**
  * UserRepository
  *
- * Querys para tabela de usuários
+ * Repositório para tabela de usuários
  */
 export class UserRepository extends BaseRepository {
     constructor() {
@@ -16,21 +21,25 @@ export class UserRepository extends BaseRepository {
     /**
      * insert
      *
-     * Cria um novo usuário
-     * @param { DeepPartial<User> } user
-     * @return { Promise<User> }
+     * Adiciona um novo usuário
+     *
+     * @param user - Dados do usuário
+     *
+     * @returns Usuário adicionado
      */
     public insert(user: DeepPartial<User>): Promise<User> {
-        const userRepository = this.getConnection().getRepository(User);
+        const userRepository: Repository<User> = this.getConnection().getRepository(User);
         return userRepository.save(userRepository.create(user));
     }
 
     /**
-     * update
+     * insert
      *
      * Altera um usuário
-     * @param { User } user
-     * @return { Promise<User> }
+     *
+     * @param user - Dados do usuário
+     *
+     * @returns Usuário alterado
      */
     public update(user: User): Promise<User> {
         return this.getConnection().getRepository(User).save(user);
@@ -39,9 +48,11 @@ export class UserRepository extends BaseRepository {
     /**
      * delete
      *
-     * Remove um usuário pelo id
-     * @param { string } id
-     * @return { Promise<DeleteResult> }
+     * Remove um usuário pelo ID
+     *
+     * @param id - ID do usuário
+     *
+     * @returns Resultado da remoção
      */
     public delete(id: string): Promise<DeleteResult> {
         return this.getConnection().getRepository(User).delete(id);
@@ -50,9 +61,11 @@ export class UserRepository extends BaseRepository {
     /**
      * findByName
      *
-     * Busca um usuário pelo name
-     * @param { string } name - Nome é chave única
-     * @return { Promise<User | undefined> }
+     * Busca um usuário pelo nome
+     *
+     * @param name - Nome do usuário
+     *
+     * @returns Usuário buscado
      */
     public findByName(name: string): Promise<User | undefined> {
         return this.getConnection().getRepository(User).findOne({ name });

@@ -5,7 +5,7 @@ export class User extends BaseEntity {
     @ObjectIdColumn()
     public id: ObjectID;
 
-    @Column()
+    @Column({ unique: true })
     public name: string;
 
     @Column()
