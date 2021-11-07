@@ -2,7 +2,7 @@
 
 ## Banco de dados
 
-A princípio para rodar no modo dev é necessário inserir um usuário válido para acessar o mongo, assim como a base __ho-database__
+Antes de iniciar o servidor é necessário inserir um `usuário` válido para acessar o mongo, assim como a base `ho-database`
 
 Com o docker rodando execute os comandos abaixo:
 
@@ -27,7 +27,11 @@ db.createUser({
 
 ## Docker
 
-Para iniciar o projeto é necessário ter o docker e o docker-compose instalado.
+Para iniciar o projeto é necessário ter o `docker` e o `docker-compose` instalados.
+
+Docker: <https://docs.docker.com/engine/install/>
+
+Docker Compose: <https://docs.docker.com/compose/install/>
 
 Instale as dependências rodando o comando:
 
@@ -47,7 +51,7 @@ Para rodar o projeto basta executar:
 docker-compose up
 ```
 
-Agora tudo deve estar ok, verifique as informações de conexão no arquivo `src/config/database`
+`OBS`: Verifique as informações de conexão no arquivo `src/config/database`
 
 Se tudo estiver ok a api e a documentação deve estar rodando nos endereços:
 
