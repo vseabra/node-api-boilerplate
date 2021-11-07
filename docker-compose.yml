@@ -3,7 +3,7 @@ version: '3'
 services:
     node:
         container_name: ho-api
-        build: ./
+        build: .
         volumes:
             - .:/app
             - /app/node_modules
@@ -35,22 +35,9 @@ services:
         logging:
             driver: none
 
-    db:
-        container_name: ho-mysql
-        image: mysql:5.7
-        volumes:
-            - ~/docker/volumes/HO_Mysql:/var/lib/mysql
-        restart: always
-        environment:
-            MYSQL_USER: admin
-            MYSQL_PASSWORD: 'c81ac4de8f953064be8e0909'
-            MYSQL_ROOT_PASSWORD: 'bc87029036878ccd9d77c538'
-            MYSQL_DATABASE: ho
-
 volumes:
-    node-data:
-    mongo-data:
-    db-data:
+    ho-node-data:
+    ho-mongo-data:
 
 networks:
     ho-connect:
