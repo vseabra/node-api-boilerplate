@@ -76,7 +76,7 @@ export class App {
 
         this.app.use(compression()); // Compressão GZIP
 
-        zthis.app.use(fileMiddleware); // Trata arquivos enviados para rota e adiciona no express.req
+        this.app.use(fileMiddleware); // Trata arquivos enviados para rota e adiciona no express.req
 
         // middlewares externos
         if (middlewares) {
