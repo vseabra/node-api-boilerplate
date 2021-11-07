@@ -2,7 +2,7 @@
 import { getMockReq, getMockRes } from '@jest-mock/express';
 
 // Routes
-import { RouteResponse } from '../../routes/RouteResponse';
+import { RouteResponse } from '../../src/routes/RouteResponse';
 
 describe('Testa classe RouterResponse', () => {
     test('Status de sucesso', () => {

@@ -1,4 +1,4 @@
-import { ObjectUtils } from '../../utils/ObjectUtils';
+import { ObjectUtils } from '../../src/utils/ObjectUtils';
 
 describe('Testa utils de Objects', () => {
     test('Testa método #isObject', () => {

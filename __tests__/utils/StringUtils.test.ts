@@ -1,4 +1,4 @@
-import { StringUtils } from '../../utils/StringUtils';
+import { StringUtils } from '../../src/utils/StringUtils';
 
 describe('Testa utils de string', () => {
     test('Testa método #firstUpperCase', () => {
