@@ -1,7 +1,7 @@
 {
     "name": "ho_api",
     "version": "1.0.0",
-    "description": "Boilerplate para API com Node e Typescript",
+    "description": "Node API Boilerplate",
     "main": "dist/server.js",
     "scripts": {
         "prepare": "husky install",
