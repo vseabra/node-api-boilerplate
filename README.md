@@ -11,7 +11,7 @@ Com o **docker** rodando execute os comandos abaixo:
 docker exec -it ho-mongo bash
 
 # conecta na base de dados
-mongo -u ho_root -p
+mongo -u ho_root -p (senha disponível em 'docker-compose > MONGO_INITDB_ROOT_PASSWORD')
 
 # adiciona uma base de dados caso não exista
 use ho-database
