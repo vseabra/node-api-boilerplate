@@ -2,7 +2,7 @@
 import 'reflect-metadata';
 
 // Models
-import { Method, IRouteDef, EnumDecorators } from 'models';
+import { Method, IRouteDef, EnumDecorators } from '../models';
 
 const routeAdd = (method: Method, path: string): MethodDecorator => {
     return (target: any, propertyKey: string | symbol): void => {
