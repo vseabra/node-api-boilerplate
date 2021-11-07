@@ -2,7 +2,7 @@
 
 ## Banco de dados
 
-Antes de iniciar o servidor é necessário inserir um `usuário` válido para acessar o mongo, assim como a base `ho-database`
+Antes de iniciar o servidor é necessário inserir um `usuário` válido para acessar o mongo, assim como a base de dados `ho-database`
 
 Com o **docker** rodando execute os comandos abaixo:
 
@@ -53,17 +53,17 @@ Para rodar o projeto basta executar o comando:
 docker-compose up
 ```
 
-`OBS`: Verifique as informações de conexão no arquivo `src/config/database`
+**`OBS`**: Verifique as informações de conexão no arquivo `src/config/database`
 
 Se tudo estiver ok a api e a documentação deve estar rodando nos endereços:
 
 **API**: <http://localhost:4444>
 
-**Documentação de endpoints**: <http://localhost:4444/swagger>
+**Documentação dos endpoints**: <http://localhost:4444/swagger>
 
 ## NGROK
 
-Em alguns navegadores para acessar o swagger ou a documentação do código, será preciso rodar em modo https, para isso basta executar o ngrok
+Em alguns navegadores, para acessar o `swagger` ou a `documentação do código`, será preciso rodar em modo https por meio do ngrok:
 
 ```bash
 ngrok http 4444
