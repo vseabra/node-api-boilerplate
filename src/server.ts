@@ -1,15 +1,15 @@
 // Library
-import { App } from 'library';
+import { App } from './library';
 
 // Config
-import { dbConfig } from 'config/database';
-import { swaggerConfig } from 'config/swagger';
+import { dbConfig } from './config/database';
+import { swaggerConfig } from './config/swagger';
 
 // Middlewares
-import { Logger } from 'middlewares/Logger';
+import { Logger } from './middlewares/Logger';
 
 // Endpoints
-import { UserController } from './endpoints/v1/users/User.controller';
+import { UserController } from './modules/users/v1/controllers/UserController';
 
 const app: App = new App({
     port: Number(process.env.PORT || 8080),

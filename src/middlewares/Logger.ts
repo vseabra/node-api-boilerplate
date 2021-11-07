@@ -2,7 +2,7 @@
 import { Request, Response, NextFunction } from 'express';
 
 // Models
-import { ILogger } from 'models';
+import { ILogger } from '../models';
 
 /**
  * Logger

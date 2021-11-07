@@ -1,16 +1,19 @@
+// Modules
 import { Connection, ConnectionOptions, createConnection } from 'typeorm';
-import { EnumConstants } from '../../models/EnumConstants';
+
+// Models
+import { EnumConstants } from '../../models';
 
 /**
  * Database
  *
- * Gerencia a conexão com o banco de dados
+ * Classe para gerenciar a conexão com o banco de dados
  */
 export class Database {
     /**
      * connect
      *
-     * Retorna conexão com o banco de dados e em caso de erro o servidor inicia
+     * Retorna conexão com o banco de dados
      *
      * @param connectionOptions - Opções para conexão
      *

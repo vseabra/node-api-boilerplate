@@ -1,4 +1,4 @@
-import { TObject } from 'models';
+import { TObject } from '../models';
 
 /**
  * ObjectUtils

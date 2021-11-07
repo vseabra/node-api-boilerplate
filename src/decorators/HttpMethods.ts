@@ -1,7 +1,8 @@
+// Modules
 import 'reflect-metadata';
-import { Method } from '../models/EnumMethod';
-import { IRouteDef } from '../models/IRouteDef';
-import { EnumDecorators } from '../models/EnumDecorators';
+
+// Models
+import { Method, IRouteDef, EnumDecorators } from 'models';
 
 const routeAdd = (method: Method, path: string): MethodDecorator => {
     return (target: any, propertyKey: string | symbol): void => {
@@ -9,7 +10,7 @@ const routeAdd = (method: Method, path: string): MethodDecorator => {
             Reflect.defineMetadata(EnumDecorators.ROUTES, [], target.constructor);
         }
 
-        const routes = Reflect.getMetadata(EnumDecorators.ROUTES, target.constructor) as Array<IRouteDef>;
+        const routes = Reflect.getMetadata(EnumDecorators.ROUTES, target.constructor) as IRouteDef[];
 
         routes.push({
             requestMethod: method,

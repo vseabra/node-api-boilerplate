@@ -1,5 +1,8 @@
+// Modules
 import 'reflect-metadata';
-import { EnumDecorators } from '../models/EnumDecorators';
+
+// Models
+import { EnumDecorators } from '../models';
 
 export const Middlewares = (...args: any[]): any => {
     return (target: any, propertyKey: string | symbol): void => {
@@ -7,7 +10,7 @@ export const Middlewares = (...args: any[]): any => {
 
         middlewares[propertyKey] = [];
         args.forEach(item => {
-            const data: Array<any> = Array.isArray(item) ? item : [item];
+            const data: any[] = Array.isArray(item) ? item : [item];
             middlewares[propertyKey] = middlewares[propertyKey].concat(...data);
         });
 

@@ -1,13 +1,20 @@
+// Modules
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { checkSchema, Result, Schema, ParamSchema, ValidationError, validationResult, Meta } from 'express-validator';
+
+// Utils
 import { StringUtils } from '../utils';
+
+// Routes
 import { RouteResponse } from '../routes';
-import { BaseRepository } from './database';
+
+// Repositories
+import { BaseRepository } from './database/repository';
 
 /**
  * BaseValidator
  *
- * Faz tratamentos relacionados aos middlewares de validação de parâmetros
+ * Classe para tratamentos relacionados aos middlewares de validação de parâmetros
  */
 export class BaseValidator {
     /**
@@ -63,7 +70,7 @@ export class BaseValidator {
      *
      * @returns Lista de validadores
      */
-    protected static validationList(schema: Schema): Array<RequestHandler> {
+    protected static validationList(schema: Schema): RequestHandler[] {
         return [<any>checkSchema(schema), BaseValidator.checkError];
     }
 
@@ -73,7 +80,7 @@ export class BaseValidator {
      * Verifica se existem erros nos parâmetros e da mensagem de erro
      *
      * @param req - Requisição
-     * @param res - Resposta
+     * @param res - Resposta da requisição
      * @param next - Callback
      */
     private static checkError(req: Request, res: Response, next: NextFunction): void {
@@ -95,7 +102,7 @@ export class BaseValidator {
      *
      * @returns Lista de validadores
      */
-    public static onlyId(repository: BaseRepository): Array<RequestHandler> {
+    public static onlyId(repository: BaseRepository): RequestHandler[] {
         return BaseValidator.validationList({ id: BaseValidator.validators.id(repository) });
     }
 }

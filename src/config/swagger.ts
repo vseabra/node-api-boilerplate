@@ -4,7 +4,7 @@ export const swaggerConfig: swaggerJSDoc.OAS3Options = {
     swaggerDefinition: {
         openapi: '3.0.0',
         info: {
-            title: 'Helpper Origins API',
+            title: 'Node API Boilerplate',
             version: '1.0.0'
         },
         host: 'localhost:4444',
@@ -18,5 +18,5 @@ export const swaggerConfig: swaggerJSDoc.OAS3Options = {
             }
         }
     },
-    apis: ['src/library/third-party/swagger/**/*.ts', 'src/endpoints/**/*.ts']
+    apis: ['src/library/third-party/swagger/**/*.ts', 'src/modules/**/*.ts']
 };

@@ -1,5 +1,8 @@
+// Modules
 import { Request } from 'express';
-import { IGetListParams } from '../models/IGetListParams';
+
+// Models
+import { IGetListParams } from '../models';
 
 /**
  * BaseController
@@ -17,13 +20,13 @@ export class BaseController {
      * @returns Objeto com os parâmetros
      */
     protected static listParams(req: Request): IGetListParams {
-        const { page, size, group, groupBy } = req.query;
+        const { page, size, order, orderBy } = req.query;
 
         return {
             page: page ? Number(page) : 1,
             size: size ? Number(size) : 10,
-            order: group ? String(group) : undefined,
-            orderBy: <'ASC' | 'DESC'>String(groupBy) || 'ASC'
+            order: order ? String(order) : undefined,
+            orderBy: <'ASC' | 'DESC'>String(orderBy) || 'ASC'
         };
     }
 }

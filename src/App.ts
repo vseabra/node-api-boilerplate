@@ -9,13 +9,13 @@ import swaggerUI from 'swagger-ui-express';
 import { ConnectionOptions } from 'typeorm';
 
 // Routes
-import { TClass, RoutesController, RouteResponse } from 'routes';
+import { TClass, RoutesController, RouteResponse } from './routes';
 
 // Models
-import { IAppConfig, AppDef } from 'models';
+import { IAppConfig, AppDef } from './models';
 
 // Library
-import { Database } from 'library';
+import { Database } from './library';
 
 /**
  * App
@@ -85,7 +85,7 @@ export class App {
      *
      * @param controllers - Lista de controllers
      */
-    private setRoutes(controllers: Array<TClass>): void {
+    private setRoutes(controllers: TClass[]): void {
         this.app.use(RoutesController.exportRoutes(controllers));
     }
 
@@ -121,7 +121,7 @@ export class App {
      *
      * @param assets - Lista de ferramentas externas
      */
-    private setAssets(assets: Array<string> | undefined): void {
+    private setAssets(assets: string[] | undefined): void {
         if (assets) {
             assets.forEach((dir: string) => {
                 this.app.use('/public', express.static(dir));

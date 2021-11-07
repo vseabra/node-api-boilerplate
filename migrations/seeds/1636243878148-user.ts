@@ -1,5 +1,8 @@
+// Modules
 import { MigrationInterface, QueryRunner } from 'typeorm';
-import { User } from '../../src/endpoints/v1/users/User.entity';
+
+// Entities
+import { User } from '../../src/library/database/entity';
 
 export class user1636243878148 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {

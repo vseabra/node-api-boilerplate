@@ -4,14 +4,9 @@ export const dbConfig: ConnectionOptions = {
     name: 'ho-api',
     type: 'mongodb',
     authSource: 'admin',
-    database: 'baseapi',
+    database: 'ho-database',
     url: process.env.MONGO_CONNECTION_URL,
-    entities: [
-        'src/endpoints/v1/**/*.entity.ts',
-        'src/library/database/entity/**/*.entity.ts',
-        'endpoints/v1/**/*.entity.js',
-        'library/database/entity/**/*.entity.js'
-    ],
+    entities: ['src/library/database/entity/**/*.ts', 'library/database/entity/**/*.js'],
     migrations: ['migrations/seeds/*.ts'],
     cli: {
         migrationsDir: 'migrations/seeds'
