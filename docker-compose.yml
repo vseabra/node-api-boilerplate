@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+    node:
+        container_name: ho-api
+        build: ./
+        volumes:
+            - .:/app
+            - /app/node_modules
+        environment:
+            - NODE_ENV=development
+            - PORT=8080
+            - MONGO_CONNECTION_URL=mongodb://ho_root:55a716fe3d2053ed61b16948@ho-mongo:27017
+        networks:
+            - ho-connect
+        links:
+            - mongo
+        ports:
+            - 4444:8080
+
+    mongo:
+        container_name: ho-mongo
+        restart: always
+        image: mongo
+        command: [--auth]
+        volumes:
+            - ~/docker/volumes/HO_MongoDB:/data/db
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: ho_root
+            MONGO_INITDB_ROOT_PASSWORD: 55a716fe3d2053ed61b16948
+        networks:
+            - ho-connect
+        ports:
+            - 27017:27017
+        logging:
+            driver: none
+
+    db:
+        container_name: ho-mysql
+        image: mysql:5.7
+        volumes:
+            - ~/docker/volumes/HO_Mysql:/var/lib/mysql
+        restart: always
+        environment:
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: 'c81ac4de8f953064be8e0909'
+            MYSQL_ROOT_PASSWORD: 'bc87029036878ccd9d77c538'
+            MYSQL_DATABASE: ho
+
+volumes:
+    node-data:
+    mongo-data:
+    db-data:
+
+networks:
+    ho-connect:
+        driver: bridge
