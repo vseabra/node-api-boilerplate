@@ -2,26 +2,28 @@
 
 ## Banco de dados
 
-A princípio para rodar no modo dev é necessário inserir um usuário válido para acessar o mongo, assim como a base __baseapi__
+A princípio para rodar no modo dev é necessário inserir um usuário válido para acessar o mongo, assim como a base __ho-database__
 
-Com o docker rodando basta executar os comandos a baixo:
+Com o docker rodando execute os comandos abaixo:
 
-    # conectar no docker
-    docker exec -it ho-mongo bash
+```sh
+# conecta no docker
+docker exec -it ho-mongo bash
 
-    # conectar a base de dados
-    mongo -u ho_root -p
+# conecta na base de dados
+mongo -u ho_root -p
 
-    # adiciona uma base de dados caso não exista
-    use baseapi
+# adiciona uma base de dados caso não exista
+use ho-database
 
-    # adiciona usuário para acesso ao banco
-    db.createUser({
-        user: 'ho_baseapi',
-        pwd: 'UTTEddFDlEahlnZOVmAhj8oO',
-        roles: [ { role: 'readWrite', db: 'baseapi'} ],
-        passwordDigestor: 'server'
-    });
+# adiciona usuário para acesso ao banco
+db.createUser({
+    user: 'ho_baseapi',
+    pwd: '562f71639f6c004e088193f3',
+    roles: [ { role: 'readWrite', db: 'baseapi'} ],
+    passwordDigestor: 'server'
+});
+```
 
 ## Docker
 
@@ -33,7 +35,7 @@ Instale as dependências rodando o comando:
 npm install
 ```
 
-Na primeira vez que iniciar o projeto é necessário gerar o build da imagem do node com o comando:
+Na primeira vez que iniciar o projeto é necessário gerar o build do Dockerfile com o comando:
 
 ```sh
 docker-compose up --build
@@ -45,9 +47,9 @@ Para rodar o projeto basta executar:
 docker-compose up
 ```
 
-Agora tudo deve estar ok, verifique as informações de conexão no arquivo `config/database`
+Agora tudo deve estar ok, verifique as informações de conexão no arquivo `src/config/database`
 
-Se tudo estiver ok a api e a documentação deve estar rodando nos endereços:<br />
+Se tudo estiver ok a api e a documentação deve estar rodando nos endereços:
 
 **API**: <http://localhost:4444>
 
