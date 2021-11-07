@@ -51,11 +51,7 @@ Se tudo estiver ok a api e a documentação deve estar rodando nos endereços:<b
 
 **API**: <http://localhost:4444>
 
-**Documentação de código**: <http://localhost:4444/docs>
-
 **Documentação de endpoints**: <http://localhost:4444/swagger>
-
-**Admin Mongo**: <http://localhost:8081>
 
 ## NGROK
 
