@@ -2,7 +2,7 @@
 import { NextFunction, Request, Response } from 'express';
 
 // Models
-import { AppDef } from 'models';
+import { AppDef } from '../models';
 
 /**
  * RouteResponse
