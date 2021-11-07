@@ -35,7 +35,7 @@ Docker Compose: <https://docs.docker.com/compose/install/>
 
 ## Iniciando o servidor
 
-Instale as dependências rodando o comando:
+Instale as dependências rodando o comando abaixo na raiz do diretório:
 
 ```sh
 npm install
@@ -47,7 +47,7 @@ Na primeira vez que iniciar o projeto é necessário gerar o build do `Dockerfil
 docker-compose up --build
 ```
 
-Para rodar o projeto basta executar:
+Para rodar o projeto basta executar o comando:
 
 ```sh
 docker-compose up
