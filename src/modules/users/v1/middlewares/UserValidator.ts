@@ -33,7 +33,9 @@ export class UserValidator extends BaseValidator {
      * @returns Lista de validadores
      */
     public static post(): RequestHandler[] {
-        return UserValidator.validationList(UserValidator.model);
+        return UserValidator.validationList({
+            name: UserValidator.model.name
+        });
     }
 
     /**
