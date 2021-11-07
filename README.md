@@ -1,10 +1,10 @@
-# Iniciando o servidor
+# Node API Boilerplate
 
 ## Banco de dados
 
 Antes de iniciar o servidor é necessário inserir um `usuário` válido para acessar o mongo, assim como a base `ho-database`
 
-Com o docker rodando execute os comandos abaixo:
+Com o **docker** rodando execute os comandos abaixo:
 
 ```sh
 # conecta no docker
@@ -33,13 +33,15 @@ Docker: <https://docs.docker.com/engine/install/>
 
 Docker Compose: <https://docs.docker.com/compose/install/>
 
+## Iniciando o servidor
+
 Instale as dependências rodando o comando:
 
 ```sh
 npm install
 ```
 
-Na primeira vez que iniciar o projeto é necessário gerar o build do Dockerfile com o comando:
+Na primeira vez que iniciar o projeto é necessário gerar o build do `Dockerfile` com o comando:
 
 ```sh
 docker-compose up --build
