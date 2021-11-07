@@ -2,7 +2,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 
 // Models
-import { EnumDecorators, IRouteDef } from 'models';
+import { EnumDecorators, IRouteDef } from '../models';
 
 export declare type TClass<T = any> = new (...args: any[]) => T;
 
@@ -15,24 +15,24 @@ export class RoutesController {
     /**
      * exportRoutes
      *
-     * Exporta todos os métodos com os decorators de rest e retorna um router group do express
+     * Exporta todos os métodos com os decorators de rest
      *
-     * @param controllers
+     * @param controllers - Lista de controllers
      *
-     * @returns
+     * @returns Router group do express
      */
-    public static exportRoutes(controllers: Array<TClass>): Router {
+    public static exportRoutes(controllers: TClass[]): Router {
         const router: Router = Router();
 
         // Percorre lista de controllers para adicionar todas as rotas
         controllers.forEach((Controller: TClass<any>) => {
             const instance = new Controller();
             const prefix = Reflect.getMetadata(EnumDecorators.CONTROLLER_PREFIX, Controller);
-            const routes: Array<IRouteDef> = Reflect.getMetadata(EnumDecorators.ROUTES, Controller);
+            const routes: IRouteDef[] = Reflect.getMetadata(EnumDecorators.ROUTES, Controller);
             const allMiddlewares: any = Reflect.getMetadata(EnumDecorators.MIDDLEWARE, Controller) || {};
 
             routes.forEach((route: IRouteDef) => {
-                const methodMiddlewares: Array<any> = allMiddlewares[route.methodName] || [];
+                const methodMiddlewares: any[] = allMiddlewares[route.methodName] || [];
                 router[route.requestMethod](prefix + route.path, [...methodMiddlewares, this.runAsyncWrapper(instance[route.methodName])]);
             });
         });

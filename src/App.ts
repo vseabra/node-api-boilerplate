@@ -20,7 +20,7 @@ import { Database } from './library';
 /**
  * App
  *
- * Classe principal, responsável por gerenciar o express
+ * Classe principal responsável por gerenciar o express
  */
 export class App {
     public app: Application;
@@ -103,7 +103,7 @@ export class App {
     /**
      * configDatabase
      *
-     * Adiciona as configurações do banco de dados e da start no TypeORM
+     * Adiciona as configurações do banco de dados e inicia o TypeORM
      */
     private configDatabase(): void {
         if (this.dbConfig) {

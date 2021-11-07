@@ -1,9 +1,8 @@
 // Libraries
-import { BaseEntity, Connection, FindConditions, FindManyOptions, getConnection, ObjectID, Repository } from 'typeorm';
+import { BaseEntity, Connection, FindConditions, FindManyOptions, getConnection, ObjectID } from 'typeorm';
 
-// Interfaces
-import { EnumConstants } from '../../../models/EnumConstants';
-import { IGetListParams } from '../../../models/IGetListParams';
+// Models
+import { IGetListParams, EnumConstants } from '../../../models';
 
 /**
  * BaseRepository
@@ -18,13 +17,15 @@ export class BaseRepository {
     /**
      * getConnection
      *
-     * Retorna instância de conexão do banco
-     * @return { Connection }
+     * Retorna singleton de conexão com o banco
+     *
+     * @return Instância de conexão
      */
     protected getConnection(): Connection {
         if (!this.connection) {
             this.connection = getConnection(EnumConstants.CONNECTION_NAME);
         }
+
         return this.connection;
     }
 
@@ -32,28 +33,36 @@ export class BaseRepository {
      * list
      *
      * Retorna lista de itens
+     *
+     * @param params - Parâmetros de busca
+     *
+     * @returns Lista contendo os itens e a quantidade total de itens
      */
-    public list(params: IGetListParams): Promise<[BaseEntity[], number]> {
+    public list<Entity>(params: IGetListParams): Promise<[Entity[], number]> {
         const skip: number = (params.page - 1) * params.size;
-        const options: FindManyOptions<BaseEntity> = { take: params.size, skip };
+        const options: FindManyOptions<Entity> = {
+            take: params.size,
+            skip
+        };
 
         if (params.order) {
-            options.order = { [params.order]: params.orderBy };
+            (options.order as Record<string, IGetListParams['orderBy']>) = { [params.order]: params.orderBy };
         }
 
-        const repository: Repository<BaseEntity> = this.getConnection().getRepository(this.entity);
-        return repository.findAndCount(options);
+        return this.getConnection().getRepository<Entity>(this.entity).findAndCount(options);
     }
 
     /**
      * findOne
      *
-     * Busca um item por id
-     * @param { string | number | ObjectID | Date } id
-     * @return { Promise<any> } object group
+     * Busca um item pelo iD
+     *
+     * @param id - ID do item
+     *
+     * @returns Item buscado
      */
-    public findOne(id: string | number | ObjectID | Date): Promise<any> {
-        return this.getConnection().getRepository(this.entity).findOne(id);
+    public findOne<Entity>(id: string | number | ObjectID | Date): Promise<Entity | undefined> {
+        return this.getConnection().getRepository<Entity>(this.entity).findOne(id);
     }
 
     /**
@@ -61,9 +70,9 @@ export class BaseRepository {
      *
      * Busca todos os itens que atenderem a condição
      *
-     * @param { FindConditions<Entity> | undefined } options - Condições de busca
+     * @param options - Condições de busca
      *
-     * @return { Promise<Entity[]> } Lista de itens
+     * @returns Lista de itens
      */
     public find<Entity>(options?: FindConditions<Entity> | undefined): Promise<Entity[]> {
         return this.getConnection().getRepository<Entity>(this.entity).find(options);

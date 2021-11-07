@@ -102,11 +102,11 @@ export class RouteResponse {
      * Retorno para autenticação não autorizada
      *
      * @param res - Resposta da requisição
-     * @param msg - Mensagem
+     * @param message - Mensagem de retorno
      */
-    public static unauthorizedError(res: Response, msg?: string | any): void {
+    public static unauthorizedError(res: Response, message?: string | any): void {
         res.status(401);
-        res.json(RouteResponse.formatData(false, msg || 'No permission to access this service'));
+        res.json(RouteResponse.formatData(false, message || 'No permission to access this service'));
     }
 
     /**

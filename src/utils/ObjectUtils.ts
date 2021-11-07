@@ -9,12 +9,13 @@ export class ObjectUtils {
     /**
      * isObject
      *
-     * Verifica se tem um tipo primitivo de object
+     * Verifica se o argumento passado tem o tipo primitivo 'object'
      *
      * @param object - Objeto a ser validado
      *
      * @returns É um objeto
      */
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     public static isObject(object: any): boolean {
         const type = typeof object;
         return (type === 'function' || type === 'object') && !!object && object.constructor === Object;

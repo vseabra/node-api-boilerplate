@@ -1,4 +1,6 @@
 export * from '../App';
 export * from './database';
-export { BaseValidator } from './BaseValidator';
+
 export { BaseController } from './BaseController';
+export { BaseValidator } from './BaseValidator';
+export { Logger } from './Logger';

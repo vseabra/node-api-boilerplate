@@ -1,4 +1,7 @@
+// Decorators
 import { Singleton } from '../decorators';
+
+// Models
 import { ILogger } from './ILogger';
 
 @Singleton

@@ -30,6 +30,8 @@ export class BaseValidator {
                 custom: {
                     options: async (value: string, { req }: Meta) => {
                         const data = await repository.findOne(value);
+
+                        // Usa o nome do repositório para criar o nome de referência. Ex: UserRepository => userRef
                         const refName: string = StringUtils.firstLowerCase(repository.constructor.name.replace('Repository', ''));
 
                         req.body[`${refName}Ref`] = data;

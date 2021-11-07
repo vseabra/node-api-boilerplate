@@ -1,5 +1,8 @@
+// Modules
 import 'reflect-metadata';
-import { EnumDecorators } from '../models/EnumDecorators';
+
+// Models
+import { EnumDecorators } from '../models';
 
 export const PublicRoute = (): any => {
     return (target: any, propertyKey: string | symbol) => {

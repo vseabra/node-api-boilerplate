@@ -5,10 +5,10 @@ import { ILogger } from './ILogger';
 
 export interface IAppConfig {
     port: number;
-    controllers: Array<TClass>;
+    controllers: TClass[];
     logger: ILogger;
     middlewares?: { forEach: (arg0: (middleware: any) => void) => void };
-    assets?: Array<string>;
+    assets?: string[];
     swaggerOptions?: swaggerJSDoc.OAS3Options;
     dbConfig?: ConnectionOptions;
 }

@@ -9,6 +9,7 @@ export const Middlewares = (...args: any[]): any => {
         const middlewares: any = Reflect.getMetadata(EnumDecorators.MIDDLEWARE, target.constructor) || {};
 
         middlewares[propertyKey] = [];
+
         args.forEach(item => {
             const data: any[] = Array.isArray(item) ? item : [item];
             middlewares[propertyKey] = middlewares[propertyKey].concat(...data);
