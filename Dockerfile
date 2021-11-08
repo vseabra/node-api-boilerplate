@@ -1,13 +1,20 @@
-#Define node version
+# Define image FROM
 FROM node:10
 
-# Create app directory
+# Create app directory WORKDIR
 WORKDIR /app
+
+# Enviroment ENV
 ENV PATH /app/node_modules/.bin:$PATH
 
-# Install app dependencies
+# Bundle app source COPY
 COPY package.json /app/package.json
+
+# Install dependencies
 RUN npm install
 
+# Listening ports EXPOSE
 EXPOSE 8080
+
+# Default command on container run CMD (overwritted) / ENTRYPOINT
 CMD [ "npm", "run", "dev" ]
