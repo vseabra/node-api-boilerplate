@@ -1,7 +1,7 @@
-import { Method } from './EnumMethod';
+import { EnumMethod } from './EnumMethod';
 
 export interface IRouteDef {
     path: string;
-    requestMethod: Method;
+    requestMethod: EnumMethod;
     methodName: string | symbol;
 }
