@@ -1,6 +1,20 @@
 # Node API Boilerplate
 
-## Banco de dados
+## ORM
+
+Para manipulação do banco de dados e entidades está sendo utilizada a biblioteca TypeORM:
+
+Documentação: <https://typeorm.io/#/>
+
+Entidades: <https://typeorm.io/#/entities>
+
+Manipulação: <https://typeorm.io/#/working-with-entity-manager>
+
+Uso com **`MongoDB`**: <https://typeorm.io/#/mongodb>
+
+**`OBS:`** Conforme o banco de dados utilizado, será necessário instalar o driver correspondente (**Getting Started** > # Installation > 4. Install a database driver).
+
+## Banco de dados - MongoDB
 
 Antes de iniciar o servidor é necessário inserir um `usuário` válido para acessar o mongo, assim como a base de dados `ho-database`
 
