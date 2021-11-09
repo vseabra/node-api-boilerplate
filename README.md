@@ -39,6 +39,59 @@ db.createUser({
 });
 ```
 
+## Banco de dados - MySql
+
+Em caso de uso do banco de dados `MySql`, seguir o passo a passo abaixo.
+
+No arquivo `docker-compose.yml` inserir:
+
+1. Uma nova `URL` de conexão no caminho `services: > node: > environment:`
+
+```yml
+- MYSQL_CONNECTION_URL=mysql://ho_root:90e271d9b4ae4a6812e86cee@ho-mysql:3306
+```
+
+2. Um novo `link` com o container do mysql no caminho `services: > node: > links:`
+
+```yml
+- mysql
+```
+
+3. Um novo `service` para o container do mysql no caminho `services:`
+
+```yml
+mysql:
+    container_name: ho-mysql
+    restart: always
+    image: mysql:5.7
+    volumes:
+        - ~/docker/volumes/HO_Mysql:/var/lib/mysql
+    environment:
+        MYSQL_DATABASE: ho-database
+        MYSQL_USER: ho_root
+        MYSQL_PASSWORD: 90e271d9b4ae4a6812e86cee
+        MYSQL_ROOT_PASSWORD: 327c56a1d1c5803d92a4dad9
+    networks:
+        - ho-connect
+    ports:
+        - 3306:3306
+```
+
+4. Um novo `link` com o container do mysql no caminho `volumes:`
+
+```yml
+ho-mysql-data:
+```
+
+No arquivo `src/config/database.ts` substituir a definição na exportação das opções de conexão do banco:
+
+```ts
+// Trocar
+...mongoOptions
+// Por
+...mysqlOptions
+```
+
 ## Docker
 
 Para iniciar o projeto é necessário ter o `docker` e o `docker-compose` instalados.

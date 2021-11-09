@@ -18,6 +18,7 @@ services:
         ports:
             - 4444:8080
 
+    # Banco com MongoDB
     mongo:
         container_name: ho-mongo
         restart: always
@@ -33,7 +34,7 @@ services:
         ports:
             - 27017:27017
         logging:
-            driver: none
+            driver: none # Habilitar para visualizar as queries do banco
 
 volumes:
     ho-node-data:

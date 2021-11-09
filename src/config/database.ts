@@ -1,19 +1,38 @@
 import { ConnectionOptions } from 'typeorm';
+import { MongoConnectionOptions } from 'typeorm/driver/mongodb/MongoConnectionOptions';
+import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOptions';
 
-export const dbConfig: ConnectionOptions = {
-    name: 'ho-api',
-    type: 'mongodb',
-    authSource: 'admin',
-    database: 'ho-database',
-    url: process.env.MONGO_CONNECTION_URL,
-    entities: ['src/library/database/entity/**/*.ts', 'library/database/entity/**/*.js'],
-    migrations: ['migrations/seeds/*.ts'],
+// Opções genéricas
+const baseOptions: Omit<ConnectionOptions, 'type'> = {
+    name: 'ho-api', // Nome da conexão
+    database: 'ho-database', // Nome do banco
+    entities: ['src/library/database/entity/**/*.ts', 'library/database/entity/**/*.js'], // Local das entidades
+    migrations: ['migrations/seeds/*.ts'], // Local das migrations
     cli: {
         migrationsDir: 'migrations/seeds'
     },
-    useUnifiedTopology: true,
-    useNewUrlParser: true,
-    migrationsRun: process.env.NODE_ENV === 'development',
-    logging: process.env.NODE_ENV === 'development',
+    migrationsRun: process.env.NODE_ENV === 'development', // Habilita execução das migrations
+    logging: process.env.NODE_ENV === 'development', // Habilita logs
     synchronize: true
 };
+
+// Opções para conexão com MySql
+const mysqlOptions: MysqlConnectionOptions = {
+    type: 'mysql',
+    url: process.env.MYSQL_CONNECTION_URL,
+    logging: false // Habilitar para visualizar as queries do banco
+};
+
+// Opções para conexão com MongoDB
+const mongoOptions: MongoConnectionOptions = {
+    type: 'mongodb',
+    url: process.env.MONGO_CONNECTION_URL,
+    authSource: 'admin',
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+};
+
+export const dbConfig = {
+    ...baseOptions,
+    ...mongoOptions
+} as ConnectionOptions;
