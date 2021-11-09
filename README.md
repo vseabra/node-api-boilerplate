@@ -132,6 +132,6 @@ Se tudo estiver ok a api e a documentação deve estar rodando nos endereços:
 
 Em alguns navegadores, para acessar o `swagger` ou a `documentação do código`, será preciso rodar em modo https por meio do ngrok:
 
-```bash
+```sh
 ngrok http 4444
 ```
