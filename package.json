@@ -9,9 +9,9 @@
         "build": "npm run lint && npm run test && tsc --build --clean",
         "lint": "eslint ./src/ --ext .ts",
         "dev": "nodemon",
-        "seed:create": "./node_modules/.bin/ts-node --transpile-only ./node_modules/typeorm/cli.js migration:create -c ho-api -f ./src/config/ormconfig-migrations.ts -n",
-        "seed:run": "./node_modules/.bin/ts-node --transpile-only ./node_modules/typeorm/cli.js migration:run -c ho-api -f ./src/config/ormconfig-migrations.ts",
-        "seed:revert": "./node_modules/.bin/ts-node --transpile-only ./node_modules/typeorm/cli.js migration:revert -c ho-api -f ./src/config/ormconfig-migrations.ts",
+        "seed:create": "./node_modules/.bin/ts-node --transpile-only ./node_modules/typeorm/cli.js migration:create -c riott-api -f ./src/config/ormconfig-migrations.ts -n",
+        "seed:run": "./node_modules/.bin/ts-node --transpile-only ./node_modules/typeorm/cli.js migration:run -c riott-api -f ./src/config/ormconfig-migrations.ts",
+        "seed:revert": "./node_modules/.bin/ts-node --transpile-only ./node_modules/typeorm/cli.js migration:revert -c riott-api -f ./src/config/ormconfig-migrations.ts",
         "docs": "typedoc"
     },
     "keywords": [],

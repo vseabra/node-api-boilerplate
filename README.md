@@ -16,19 +16,19 @@ Uso com **`MongoDB`**: <https://typeorm.io/#/mongodb>
 
 ## Banco de dados - MongoDB
 
-Antes de iniciar o servidor é necessário inserir um `usuário` válido para acessar o mongo, assim como a base de dados `ho-database`
+Antes de iniciar o servidor é necessário inserir um `usuário` válido para acessar o mongo, assim como a base de dados `riott-database`
 
 Com o **docker** rodando execute os comandos abaixo:
 
 ```sh
 # conecta no docker
-docker exec -it ho-mongo bash
+docker exec -it riott-mongo bash
 
 # conecta na base de dados
 mongo -u ho_root -p (senha disponível em 'docker-compose > MONGO_INITDB_ROOT_PASSWORD')
 
 # adiciona uma base de dados caso não exista
-use ho-database
+use riott-database
 
 # adiciona usuário para acesso ao banco
 db.createUser({
@@ -48,7 +48,7 @@ No arquivo `docker-compose.yml` inserir:
 1. Uma nova `URL` de conexão no caminho `services: > node: > environment:`
 
 ```yml
-- MYSQL_CONNECTION_URL=mysql://ho_root:90e271d9b4ae4a6812e86cee@ho-mysql:3306
+- MYSQL_CONNECTION_URL=mysql://ho_root:90e271d9b4ae4a6812e86cee@riott-mysql:3306
 ```
 
 2. Um novo `link` com o container do mysql no caminho `services: > node: > links:`
@@ -61,18 +61,18 @@ No arquivo `docker-compose.yml` inserir:
 
 ```yml
 mysql:
-    container_name: ho-mysql
+    container_name: riott-mysql
     restart: always
     image: mysql:5.7
     volumes:
         - ~/docker/volumes/HO_Mysql:/var/lib/mysql
     environment:
-        MYSQL_DATABASE: ho-database
+        MYSQL_DATABASE: riott-database
         MYSQL_USER: ho_root
         MYSQL_PASSWORD: 90e271d9b4ae4a6812e86cee
         MYSQL_ROOT_PASSWORD: 327c56a1d1c5803d92a4dad9
     networks:
-        - ho-connect
+        - riott-connect
     ports:
         - 3306:3306
 ```
@@ -80,7 +80,7 @@ mysql:
 4. Um novo `link` com o container do mysql no caminho `volumes:`
 
 ```yml
-ho-mysql-data:
+riott-mysql-data:
 ```
 
 No arquivo `src/config/database.ts` substituir a definição na exportação das opções de conexão do banco:
@@ -91,6 +91,8 @@ No arquivo `src/config/database.ts` substituir a definição na exportação das
 // Por
 ...mysqlOptions
 ```
+
+Nas entidades `src/library/database/entity` alterar as colunas primárias de `ObjectIdColumn` para `@PrimaryGeneratedColumn`.
 
 ## Docker
 

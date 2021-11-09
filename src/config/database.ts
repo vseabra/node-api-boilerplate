@@ -4,8 +4,8 @@ import { MysqlConnectionOptions } from 'typeorm/driver/mysql/MysqlConnectionOpti
 
 // Opções genéricas
 const baseOptions: Omit<ConnectionOptions, 'type'> = {
-    name: 'ho-api', // Nome da conexão
-    database: 'ho-database', // Nome do banco
+    name: 'riott-api', // Nome da conexão
+    database: 'riott-database', // Nome do banco
     entities: ['src/library/database/entity/**/*.ts', 'library/database/entity/**/*.js'], // Local das entidades
     migrations: ['migrations/seeds/*.ts'], // Local das migrations
     cli: {
