@@ -25,14 +25,14 @@ Com o **docker** rodando execute os comandos abaixo:
 docker exec -it riott-mongo bash
 
 # conecta na base de dados
-mongo -u ho_root -p (senha disponível em 'docker-compose > MONGO_INITDB_ROOT_PASSWORD')
+mongo -u riott_root -p (senha disponível em 'docker-compose > MONGO_INITDB_ROOT_PASSWORD')
 
 # adiciona uma base de dados caso não exista
 use riott-database
 
 # adiciona usuário para acesso ao banco
 db.createUser({
-    user: 'ho_baseapi',
+    user: 'riott_baseapi',
     pwd: '562f71639f6c004e088193f3',
     roles: [ { role: 'readWrite', db: 'baseapi'} ],
     passwordDigestor: 'server'
@@ -48,7 +48,7 @@ No arquivo `docker-compose.yml` inserir:
 1. Uma nova `URL` de conexão no caminho `services: > node: > environment:`
 
 ```yml
-- MYSQL_CONNECTION_URL=mysql://ho_root:90e271d9b4ae4a6812e86cee@riott-mysql:3306
+- MYSQL_CONNECTION_URL=mysql://riott_root:90e271d9b4ae4a6812e86cee@riott-mysql:3306
 ```
 
 2. Um novo `link` com o container do mysql no caminho `services: > node: > links:`
@@ -65,10 +65,10 @@ mysql:
     restart: always
     image: mysql:5.7
     volumes:
-        - ~/docker/volumes/HO_Mysql:/var/lib/mysql
+        - ~/docker/volumes/RIOTT_Mysql:/var/lib/mysql
     environment:
         MYSQL_DATABASE: riott-database
-        MYSQL_USER: ho_root
+        MYSQL_USER: riott_root
         MYSQL_PASSWORD: 90e271d9b4ae4a6812e86cee
         MYSQL_ROOT_PASSWORD: 327c56a1d1c5803d92a4dad9
     networks:
