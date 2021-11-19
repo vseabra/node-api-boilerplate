@@ -96,6 +96,10 @@ export class ClientController extends BaseController {
      *             type: object
      *             example:
      *               name: userName
+     *               email: email@gmail.com
+     *               phone: (55) 99999-9999
+     *               status: true
+     *               invalidField: should be ignored
      *             required:
      *               - name
      *               - email
@@ -166,11 +170,10 @@ export class ClientController extends BaseController {
     @Middlewares(ClientValidator.put())
     public async update(req: Request, res: Response): Promise<void> {
         const client: Client = req.body.clientRef;
-        client.name = req.body.name;
-        client.email = req.body.email;
-        client.phone = req.body.phone;
+        client.name = req.body.name || client.name;
+        client.email = req.body.email || client.email;
+        client.phone = req.body.phone || client.phone;
 
-        // TODO melhorar isso.
         client.status = req.body.status;
 
         await new ClientRepository().update(client);

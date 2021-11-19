@@ -67,4 +67,16 @@ export class ClientRepository extends BaseRepository {
     public findByName(name: string): Promise<Client | undefined> {
         return this.getConnection().getRepository(Client).findOne({ name });
     }
+
+    /**
+     * findByEmail.
+     *
+     * busca um cliente pelo email.
+     *
+     * @param email - email do client.
+     * @returns Promise que resolve em um Client, ou undefined.
+     */
+    public findByEmail(email: string): Promise<Client | undefined> {
+        return this.getConnection().getRepository(Client).findOne({ email });
+    }
 }

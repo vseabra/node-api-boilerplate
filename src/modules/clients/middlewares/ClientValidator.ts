@@ -19,7 +19,11 @@ import { Client } from '../../../library/database/entity';
  */
 export class ClientValidator extends BaseValidator {
     private static model: Schema = {
+        // TODO sanitizar os outros campos, assim como name
         name: BaseValidator.validators.name,
+        email: { in: 'body', isEmail: true, errorMessage: 'email invalido' },
+        phone: { in: 'body', isString: true, errorMessage: 'telefone invalido' },
+        status: { in: 'body', isBoolean: true, optional: true, errorMessage: 'status invalido' },
         id: {
             ...BaseValidator.validators.id(new ClientRepository()),
             errorMessage: 'cliente não encontrado'
@@ -30,10 +34,16 @@ export class ClientValidator extends BaseValidator {
                 options: async (_: string, { req }) => {
                     let check = false;
 
-                    // TODO validar os outros campos, fora name.
                     if (req.body.name) {
                         const clientRepository: ClientRepository = new ClientRepository();
                         const client: Client | undefined = await clientRepository.findByName(req.body.name);
+
+                        check = client ? req.body.id === client.id.toString() : true;
+                    }
+
+                    if (req.body.email) {
+                        const clientRepository: ClientRepository = new ClientRepository();
+                        const client: Client | undefined = await clientRepository.findByEmail(req.body.email);
 
                         check = client ? req.body.id === client.id.toString() : true;
                     }
@@ -52,6 +62,9 @@ export class ClientValidator extends BaseValidator {
     public static post(): RequestHandler[] {
         return ClientValidator.validationList({
             name: ClientValidator.model.name,
+            email: ClientValidator.model.email,
+            phone: ClientValidator.model.phone,
+            status: ClientValidator.model.status,
             duplicate: ClientValidator.model.duplicate
         });
     }
