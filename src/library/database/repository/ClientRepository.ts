@@ -52,7 +52,7 @@ export class ClientRepository extends BaseRepository {
      * @param id - id do cliente.
      * @returns resultado da deleleção (<DeleteResult>)
      */
-    public delete(id: number): Promise<DeleteResult> {
+    public delete(id: string): Promise<DeleteResult> {
         return this.getConnection().getRepository(Client).delete(id);
     }
 
