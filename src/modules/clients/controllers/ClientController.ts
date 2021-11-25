@@ -75,7 +75,6 @@ export class ClientController extends BaseController {
     @Middlewares(ClientValidator.onlyId())
     public async getOne(req: Request, res: Response): Promise<void> {
         const client: Client = req.body.clientRef;
-        // const client: Client | undefined = await new ClientRepository().findOne(req.params.id);
         RouteResponse.success({ ...client }, res);
     }
 
@@ -178,7 +177,6 @@ export class ClientController extends BaseController {
 
         await new ClientRepository().update(client);
 
-        // TODO talvez retornar o objjeto atualizado.
         RouteResponse.successEmpty(res);
     }
 
